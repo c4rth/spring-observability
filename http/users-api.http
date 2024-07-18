@@ -1,0 +1,11 @@
+### List all users
+GET http://localhost:8081/api/users
+
+### Find user by Id
+GET http://localhost:8081/api/users/1
+
+### Filter users by SiteId
+GET http://localhost:8081/api/users/site/3
+
+### Filter users by OrganizationId
+GET http://localhost:8081/api/users/organization/1

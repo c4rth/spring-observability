@@ -1,0 +1,34 @@
+### List all organizations
+GET http://localhost:8083/api/organizations
+
+### Find organization by Id
+GET http://localhost:8083/api/organizations/1
+
+### Find organization with sites by Id
+GET http://localhost:8083/api/organizations/1/with-sites
+
+### Find organization with sites and users by Id
+GET http://localhost:8083/api/organizations/1/with-sites-with-users
+
+### Find organization with users by Id
+GET http://localhost:8083/api/organizations/1/with-users
+
+
+### Find organization with sites by Id
+GET http://localhost:8083/api/organizations/1/with-sites
+x-b3-traceid: 0000000000000005
+x-b3-spanid: 1000000000000005
+x-b3-sampled: 1
+
+
+### Find organization with sites and users by Id
+GET http://localhost:8083/api/organizations/1/with-sites-with-users
+x-b3-traceid: 0000000000000106
+x-b3-spanid: 1000000000000005
+x-b3-sampled: 1
+
+### Find organization with sites and users by Id
+GET http://localhost:8083/api/organizations/1/with-sites-with-users?client=web
+x-b3-traceid: 0000000000001006
+x-b3-spanid: 1000000000000006
+x-b3-sampled: 1

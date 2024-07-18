@@ -1,0 +1,11 @@
+### List all sites
+GET http://localhost:8082/api/sites
+
+### Find site by Id
+GET http://localhost:8082/api/sites/1
+
+### Filter sites by OrganizationId
+GET http://localhost:8082/api/sites/organization/1
+
+### Filter sites with users by OrganizationId
+GET http://localhost:8082/api/sites/organization/1/with-users
