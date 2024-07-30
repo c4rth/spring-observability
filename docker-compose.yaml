@@ -14,6 +14,7 @@ services:
       - "9411:9411" # Zipkin
       - "9464:9464"
       - "8888:8888" # Prometheus metrics exposed by the collector
+      - "8889:8889" # Prometheus metrics exposed by the collector
 #    depends_on:
 #      - jaeger-all-in-one
 #      - zipkin-all-in-one
@@ -23,6 +24,8 @@ services:
     image: prom/prometheus
     restart: always
     command:
+      - --enable-feature=exemplar-storage
+      - --web.enable-remote-write-receiver
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -54,7 +57,11 @@ services:
       - ./docker/grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
     environment:
-      - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_USERS_DEFAULT_THEME=light
+      - GF_FEATURE_TOGGLES_ENABLE=tempoSearch,tempoServiceGraph,tempoApmTable,traceqlEditor
     ports:
       - "3000:3000"
 

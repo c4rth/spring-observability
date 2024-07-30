@@ -1,0 +1,71 @@
+info:
+  app:
+    description: '@project.description@'
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      version: '@java.version@'
+    name: '@project.name@'
+    version: '@project.version@'
+
+logging:
+  level:
+    org:
+      c4rth: INFO
+      springframework:
+        cloud:
+          sleuth: TRACE
+        web: DEBUG
+    io: TRACE
+
+server:
+  port: 8083
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    # Exemplar metrics
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      minimum-expected-value:
+        http.server.requests: 5ms
+      maximum-expected-value:
+        http.server.requests: 1000ms
+    tags:
+      application: ${spring.application.name}
+
+spring:
+  application:
+    name: organization-service
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:organizationdb
+    username: sa
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  sleuth:
+    propagation:
+      type: b3
+    sampler:
+      probability: 1.0
+  zipkin:
+    baseUrl: http://localhost:9411
+    service:
+      name: ${spring.application.name}
