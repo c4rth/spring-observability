@@ -15,7 +15,7 @@ logging:
         cloud:
           sleuth: TRACE
         web: DEBUG
-    io: TRACE
+  #  io: TRACE
   pattern:
     # Logging pattern containing traceId and spanId; no longer provided through Sleuth by default
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
@@ -27,12 +27,16 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,prometheus,metrics
+        include: '*'
   endpoint:
     metrics:
       enabled: true
     prometheus:
       enabled: true
+    configprops:
+      show-values: always
+    env:
+      show-values: always
   metrics:
     # Exemplar metrics
     distribution:
@@ -58,9 +62,9 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+  #  properties:
+  #    hibernate:
+  #      dialect: org.hibernate.dialect.H2Dialect
   zipkin:
     baseUrl: http://localhost:9411
     service:

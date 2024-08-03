@@ -3,6 +3,7 @@
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
     <module name="organization-service" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="org.c4rth.organizationservice.OrganizationServiceApplication" />
+    <option name="VM_PARAMETERS" value="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
