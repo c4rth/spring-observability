@@ -12,6 +12,7 @@
         <module>organization-service</module>
         <module>site-service</module>
         <module>user-service</module>
+        <module>openapigen-7</module>
     </modules>
 
 </project>

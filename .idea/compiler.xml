@@ -7,13 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="organization-service" />
-        <module name="site-service" />
         <module name="user-service" />
+        <module name="openapigen-7" />
+        <module name="site-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="enforcer-rules" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="openapigen-7" options="-parameters -parameters" />
       <module name="organization-service" options="-parameters" />
       <module name="site-service" options="-parameters" />
       <module name="user-service" options="-parameters" />

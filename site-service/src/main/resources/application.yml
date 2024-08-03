@@ -15,6 +15,9 @@ logging:
         cloud:
           sleuth: TRACE
         web: DEBUG
+  pattern:
+    # Logging pattern containing traceId and spanId; no longer provided through Sleuth by default
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
 
 server:
   port: 8082
@@ -30,9 +33,6 @@ management:
     prometheus:
       enabled: true
   metrics:
-    export:
-      prometheus:
-        enabled: true
     # Exemplar metrics
     distribution:
       percentiles-histogram:
@@ -43,6 +43,7 @@ management:
         http.server.requests: 1000ms
     tags:
       application: ${spring.application.name}
+  prometheus.metrics.export.enabled: true
 
 spring:
   application:
@@ -59,12 +60,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-  sleuth:
-    propagation:
-      type: b3
-    sampler:
-      probability: 1.0
   zipkin:
     baseUrl: http://localhost:9411
     service:
       name: ${spring.application.name}
+  threads:
+    virtual:
+      enabled: true
+
+management.tracing.propagation.type: b3
+
+management.tracing.sampling.probability: 1.0
