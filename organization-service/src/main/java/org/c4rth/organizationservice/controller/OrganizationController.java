@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.c4rth.organizationservice.client.SiteRestTemplateClient;
 import org.c4rth.organizationservice.client.UserRestTemplateClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,21 +25,23 @@ import org.c4rth.organizationservice.service.OrganizationService;
 @RestController
 @RequestMapping("/api/organizations")
 public class OrganizationController {
+	private final OrganizationService organizationService;
+	private final SiteWebClient siteWebClient;
+	private final SiteRestTemplateClient siteRestTemplateClient;
+	private final UserWebClient userWebClient;
+	private final UserRestTemplateClient userRestTemplateClient;
 
-	@Autowired
-	private OrganizationService organizationService;
-
-	@Autowired
-	private SiteWebClient siteWebClient;
-
-	@Autowired
-	private SiteRestTemplateClient siteRestTemplateClient;
-
-	@Autowired
-	private UserWebClient userWebClient;
-
-	@Autowired
-	private UserRestTemplateClient userRestTemplateClient;
+	public OrganizationController(OrganizationService organizationService,
+								  SiteWebClient siteWebClient,
+								  SiteRestTemplateClient siteRestTemplateClient,
+								  UserWebClient userWebClient,
+								  UserRestTemplateClient userRestTemplateClient) {
+		this.organizationService = organizationService;
+		this.siteWebClient = siteWebClient;
+		this.siteRestTemplateClient = siteRestTemplateClient;
+		this.userWebClient = userWebClient;
+		this.userRestTemplateClient = userRestTemplateClient;
+	}
 
 	@PostMapping
 	public Organization add(@RequestBody Organization organization) {
@@ -53,7 +54,7 @@ public class OrganizationController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<?> findById(@PathVariable Long id) {
 		Optional<Organization> organization = organizationService.get(id);
 		if (organization.isPresent())
 			return new ResponseEntity<>(organization.get(), HttpStatus.OK);
@@ -62,7 +63,7 @@ public class OrganizationController {
 	}
 
 	@GetMapping("/{id}/with-sites")
-	public Organization findByIdWithSites(@PathVariable("id") Long id, @RequestParam(value = "client", defaultValue = "web") String client) {
+	public Organization findByIdWithSites(@PathVariable Long id, @RequestParam(defaultValue = "web") String client) {
 		Optional<Organization> organizationOpt = organizationService.get(id);
 		Organization organization = null;
 		if (organizationOpt.isPresent()) {
@@ -77,7 +78,7 @@ public class OrganizationController {
 	}
 
 	@GetMapping("/{id}/with-sites-with-users")
-	public Organization findByIdWithSitesAndUsers(@PathVariable("id") Long id, @RequestParam(value = "client", defaultValue = "web") String client) {
+	public Organization findByIdWithSitesAndUsers(@PathVariable Long id, @RequestParam(defaultValue = "web") String client) {
 
 		Optional<Organization> organizationOpt = organizationService.get(id);
 		Organization organization = null;
@@ -93,7 +94,7 @@ public class OrganizationController {
 	}
 
 	@GetMapping("/{id}/with-users")
-	public Organization findByIdWithUsers(@PathVariable("id") Long id, @RequestParam(value = "client", defaultValue = "web") String client) {
+	public Organization findByIdWithUsers(@PathVariable Long id, @RequestParam(defaultValue = "web") String client) {
 		Optional<Organization> organizationOpt = organizationService.get(id);
 		Organization organization = null;
 		if (organizationOpt.isPresent()) {

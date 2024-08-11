@@ -1,7 +1,6 @@
 package org.c4rth.organizationservice.client;
 
 import org.c4rth.organizationservice.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -11,11 +10,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.io.IOException;
 import java.util.List;
 
-@Component
+/*~~(component)~~>*/@Component
 public class UserRestTemplateClient {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+
+    public UserRestTemplateClient(RestTemplate organizationRestTemplate) {
+        this.restTemplate = organizationRestTemplate;
+    }
 
     public List<User> getUser(Long organizationId) throws RestClientException, IOException {
         String baseUrl = "http://localhost:8081/api/users/organization/" + organizationId;

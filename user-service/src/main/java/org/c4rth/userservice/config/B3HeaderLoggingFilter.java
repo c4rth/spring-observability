@@ -35,7 +35,7 @@ public class B3HeaderLoggingFilter implements Filter {
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
             //if (headerName.startsWith("X-B3-")) {
-                logger.info("{} B3 Header: {}={}", direction, headerName, request.getHeader(headerName));
+                logger.info("{} Header: {}={}", direction, headerName, request.getHeader(headerName));
             //}
         }
     }
@@ -43,7 +43,7 @@ public class B3HeaderLoggingFilter implements Filter {
     private void logB3Headers(HttpServletResponse response, String direction) {
         for (String headerName : response.getHeaderNames()) {
             //if (headerName.startsWith("X-B3-")) {
-                logger.info("{} B3 Header: {}={}", direction, headerName, response.getHeader(headerName));
+                logger.info("{} Header: {}={}", direction, headerName, response.getHeader(headerName));
             //}
         }
     }

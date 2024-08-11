@@ -13,6 +13,7 @@
         <module>site-service</module>
         <module>user-service</module>
         <module>openapigen-7</module>
+        <module>performance-test</module>
     </modules>
 
 </project>

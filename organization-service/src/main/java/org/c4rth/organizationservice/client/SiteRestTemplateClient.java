@@ -11,14 +11,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.io.IOException;
 import java.util.List;
 
-@Component
+/*~~(component)~~>*/@Component
 public class SiteRestTemplateClient {
 
 
     @Autowired
     private RestTemplate restTemplate;
 
-    public List<Site> findByOrganization(@PathVariable("organizationId") Long organizationId) {
+    public List<Site> findByOrganization(@PathVariable Long organizationId) {
         String baseUrl = "http://localhost:8082/api/sites/organization/" + organizationId;
         ResponseEntity<List> response = null;
         try {
@@ -30,7 +30,7 @@ public class SiteRestTemplateClient {
         return response.getBody();
     }
 
-    public List<Site> findByOrganizationWithUsers(@PathVariable("organizationId") Long organizationId) {
+    public List<Site> findByOrganizationWithUsers(@PathVariable Long organizationId) {
 
         String baseUrl = "http://localhost:8082/api/sites/organization/" + organizationId + "/with-users";
         ResponseEntity<List> response = null;

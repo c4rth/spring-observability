@@ -48,7 +48,19 @@ management:
         http.server.requests: 1000ms
     tags:
       application: ${spring.application.name}
-  prometheus.metrics.export.enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+    propagation:
+      type: B3, W3C
 
 spring:
   application:
@@ -65,14 +77,6 @@ spring:
   #  properties:
   #    hibernate:
   #      dialect: org.hibernate.dialect.H2Dialect
-  zipkin:
-    baseUrl: http://localhost:9411
-    service:
-      name: ${spring.application.name}
   threads:
     virtual:
       enabled: true
-
-management.tracing.propagation.type: b3
-
-management.tracing.sampling.probability: 1.0
