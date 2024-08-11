@@ -14,6 +14,7 @@
         <module>user-service</module>
         <module>openapigen-7</module>
         <module>performance-test</module>
+        <module>rewrite-recipes</module>
     </modules>
 
 </project>

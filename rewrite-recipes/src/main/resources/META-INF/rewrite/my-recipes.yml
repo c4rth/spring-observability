@@ -1,0 +1,13 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.c4rth.rewrite.UpdateAll
+displayName: Migrate All
+description: >-
+  Migrate applications
+tags:
+  - spring
+  - boot
+recipeList:
+  - org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3
+  - org.openrewrite.java.spring.boot3.SpringBoot3BestPractices
+  - org.c4rth.rewrite.MyCustomRecipe
